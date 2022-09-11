@@ -6,25 +6,35 @@
 #include <QTextStream>
 #include <QTimer>
 
+enum class LineType {
+    MetaComment = 0,
+    Reference = 1,
+    Line = 2,
+    Triangle = 3,
+    Quad = 4,
+    OptLine = 5,
+};
+
 bool parseLine(const QByteArray &data)
 {
     if (data.isEmpty())
         return true;
 
-    auto lineType = data[0] - '0';
+    LineType lineType = static_cast<LineType>(data[0] - '0');
 
     switch (lineType) {
-    case 0:
+    case LineType::MetaComment:
         break;
-    case 1:
+    case LineType::Reference:
         break;
-    case 2:
+    case LineType::Line:
         break;
-    case 3:
+    case LineType::Triangle:
         break;
-    case 4:
+    case LineType::Quad:
         break;
-    case 5:
+    case LineType::OptLine:
+        // ignore
         break;
     default:
         return false;
